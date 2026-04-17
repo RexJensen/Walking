@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - claude/random-walk-route-generator-Bpopu
   workflow_dispatch:
 
 permissions:
