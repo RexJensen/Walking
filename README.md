@@ -4,6 +4,8 @@ Random walking-route generator. Enter how many minutes you want to walk; it uses
 your current location and OSRM's public foot-routing service to build a random
 loop that starts and ends where you are.
 
+**Live site:** https://rexjensen.github.io/Walking/
+
 ## Run locally
 
 Just open `index.html` in a browser, or serve the folder:
