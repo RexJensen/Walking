@@ -3,28 +3,76 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Random Walk</title>
+  <title>The Wandering</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
         crossorigin="">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="controls">
-    <h1>Random Walk</h1>
-    <div class="row">
-      <label for="minutes">Minutes</label>
-      <input type="number" id="minutes" value="30" min="5" max="240" step="5">
-    </div>
-    <div class="row">
-      <label for="pace">km/h</label>
-      <input type="number" id="pace" value="5" min="2" max="8" step="0.5">
-    </div>
-    <button id="generate">Generate route</button>
-    <div id="status"></div>
-    <div id="summary"></div>
-  </div>
-  <div id="map"></div>
+  <main id="panel">
+    <header class="masthead">
+      <div class="volume">VOL. I &middot; NO. <span id="issue-number">000</span></div>
+      <h1 class="title">The<br>Wandering</h1>
+      <p class="subtitle">a random route generator</p>
+      <div class="established">
+        <span class="established-label">EST. TODAY</span>
+        <span class="established-date" id="today-date"></span>
+      </div>
+      <hr class="rule">
+    </header>
+
+    <section class="step-card">
+      <div class="step-header">
+        <span class="step-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </span>
+        <span class="step-label">STEP ONE &middot; STARTING POINT</span>
+      </div>
+      <div class="search-row">
+        <input type="text" id="location-input" placeholder="e.g. Veer Towers, Las Vegas" autocomplete="off">
+        <button id="location-search" class="icon-button" aria-label="Search location">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </button>
+      </div>
+      <button id="use-location" class="link-button" type="button">Use my current location</button>
+      <div id="location-status" class="tiny"></div>
+    </section>
+
+    <section class="step-card">
+      <div class="step-header">
+        <span class="step-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </span>
+        <span class="step-label">STEP TWO &middot; DURATION</span>
+      </div>
+      <div class="duration-display">
+        <span class="duration-number" id="duration-number">30</span>
+        <span class="duration-unit">MINUTES</span>
+      </div>
+      <input type="range" id="duration" min="10" max="120" step="5" value="30">
+      <div class="slider-bounds">
+        <span>10m</span>
+        <span>120m</span>
+      </div>
+    </section>
+
+    <button id="generate" class="cta">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      <span>Generate route</span>
+    </button>
+
+    <div id="summary" class="summary"></div>
+  </main>
+
+  <div id="map" aria-label="Map"></div>
+  <button id="panel-toggle" class="panel-toggle" aria-label="Toggle panel">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
           integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
           crossorigin=""></script>
