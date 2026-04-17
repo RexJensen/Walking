@@ -1,0 +1,94 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+#map {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+#controls {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 1000;
+  background: #fff;
+  padding: 16px 18px;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  min-width: 220px;
+  max-width: calc(100vw - 24px);
+}
+
+#controls h1 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: #1d3557;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.row label {
+  font-size: 14px;
+  color: #333;
+}
+
+.row input {
+  width: 90px;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+#generate {
+  width: 100%;
+  background: #1d3557;
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+#generate:hover:not(:disabled) {
+  background: #457b9d;
+}
+
+#generate:disabled {
+  background: #8a96a8;
+  cursor: not-allowed;
+}
+
+#status {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #555;
+  min-height: 16px;
+}
+
+#summary {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1d3557;
+}
+
+@media (max-width: 500px) {
+  #controls {
+    left: 8px;
+    right: 8px;
+    top: 8px;
+  }
+}
